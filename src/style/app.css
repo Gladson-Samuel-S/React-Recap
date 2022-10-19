@@ -1,0 +1,36 @@
+:root {
+  --color: #343434;
+  --background-color: #fefefe;
+  --cyan: #06b6d4;
+  --radius: 5px;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+button {
+  color: var(--color);
+  border-radius: var(--radius);
+  background-color: var(--cyan);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.btn:hover,
+.btn:focus {
+  outline: 2px solid var(--color);
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header button {
+  background-color: transparent;
+}
