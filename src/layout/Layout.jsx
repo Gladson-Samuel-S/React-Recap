@@ -5,13 +5,14 @@ import Footer from "../components/Footer";
 import "./layout-styles.css";
 import "../style/app.css";
 import ThemeProvider from "../theme/ThemeProvider";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <ThemeProvider>
       <main className="container">
         <Header />
-        {children}
+        <Outlet />
         <Footer />
       </main>
     </ThemeProvider>
