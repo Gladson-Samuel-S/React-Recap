@@ -20,8 +20,6 @@ const Dashboard = () => {
       .catch((err) => setError(err.message));
   }, []);
 
-  console.log(notes);
-
   return (
     <>
       <div className="banner">
@@ -32,9 +30,6 @@ const Dashboard = () => {
       </div>
 
       <AllNotes notes={notes} error={error} />
-      {/* {notes.map((note, index) => (
-        <p key={index}>{note.title}</p>
-      ))} */}
     </>
   );
 };

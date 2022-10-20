@@ -23,7 +23,6 @@ body {
 .btn:focus {
   outline: 1px solid var(--color);
 }
-h
 
 /* Header */
 header {
@@ -34,6 +33,11 @@ header {
 
 header .btn {
   background-color: transparent;
+}
+
+header a {
+  color: var(--color);
+  text-decoration: none;
 }
 
 /* Dashboard */
@@ -75,7 +79,8 @@ textarea {
 }
 
 input,
-textarea {
+textarea,
+select {
   padding: 8px;
   margin-bottom: 1rem;
 }
