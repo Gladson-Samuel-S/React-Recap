@@ -1,4 +1,5 @@
 import { useTheme } from "../theme/ThemeProvider";
+import { Link } from "react-router-dom";
 import { Sun, Moon } from "react-feather";
 
 const Header = () => {
@@ -7,8 +8,10 @@ const Header = () => {
   return (
     <>
       <header>
-        <h1>🔦 Flash Notes</h1>
-        <button onClick={themeToggler}>
+        <Link to="/">
+          <h1>🔦 Flash Notes</h1>
+        </Link>
+        <button className="btn" onClick={themeToggler}>
           {theme === "light" ? <Sun /> : <Moon />}
         </button>
       </header>

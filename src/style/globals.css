@@ -50,3 +50,12 @@ h6 {
   font-weight: 600;
   overflow-wrap: break-word;
 }
+
+a {
+  color: var(--cyan);
+}
+
+hr {
+  margin: 4px 0;
+  opacity: 0.4;
+}

@@ -10,7 +10,7 @@ body {
   color: var(--color);
 }
 
-button {
+.btn {
   color: var(--color);
   border-radius: var(--radius);
   background-color: var(--cyan);
@@ -21,8 +21,9 @@ button {
 
 .btn:hover,
 .btn:focus {
-  outline: 2px solid var(--color);
+  outline: 1px solid var(--color);
 }
+h
 
 /* Header */
 header {
@@ -31,6 +32,61 @@ header {
   align-items: center;
 }
 
-header button {
+header .btn {
   background-color: transparent;
+}
+
+/* Dashboard */
+.banner {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.banner .btn {
+  background-color: transparent;
+  /* outline: 1px solid var(--color); */
+}
+
+/* All Notes */
+.notes-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.note {
+  padding: 1rem;
+  box-shadow: 0px 0px 1px var(--color);
+}
+
+footer {
+  margin: 1rem 0;
+}
+
+/* Create Note page */
+label,
+input,
+textarea {
+  display: block;
+}
+
+input,
+textarea {
+  padding: 8px;
+  margin-bottom: 1rem;
+}
+
+.saveBtn {
+  background-color: transparent;
+  border: 1px solid var(--color);
+}
+
+@media screen and (max-width: 480px) {
+  header h1 {
+    font-size: 24px;
+  }
 }
