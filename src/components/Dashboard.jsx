@@ -8,6 +8,16 @@ const Dashboard = () => {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
 
+  const deleteNote = async (id) => {
+    const res = await fetch(`${URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      setNotes(notes.filter((note) => note.id !== id));
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(URL);
@@ -29,7 +39,7 @@ const Dashboard = () => {
         </button>
       </div>
 
-      <AllNotes notes={notes} error={error} />
+      <AllNotes notes={notes} error={error} deleteNote={deleteNote} />
     </>
   );
 };
