@@ -1,9 +1,8 @@
-# Recapping some of the React Concepts
+# Recapping some of the React Concepts using Class Based Components
 
 - React router dom
-- useState
-- useContext
-- props
-- useEffect
+- lifecycle methods etc..
+- render
+- props, state
 
 etc...

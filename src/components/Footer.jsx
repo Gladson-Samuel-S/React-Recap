@@ -1,9 +1,13 @@
-const Footer = () => {
-  return (
-    <footer>
-      <p>&copy; Flash Notes {new Date().getFullYear()}</p>
-    </footer>
-  );
-};
+import React, { Component } from "react";
+
+class Footer extends Component {
+  render() {
+    return (
+      <footer>
+        <p>&copy; Flash Notes </p>
+      </footer>
+    );
+  }
+}
 
 export default Footer;

@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -7,16 +8,18 @@ import "../style/app.css";
 import ThemeProvider from "../theme/ThemeProvider";
 import { Outlet } from "react-router-dom";
 
-const Layout = () => {
-  return (
-    <ThemeProvider>
-      <main className="container">
-        <Header />
-        <Outlet />
-        <Footer />
-      </main>
-    </ThemeProvider>
-  );
-};
+class Layout extends Component {
+  render() {
+    return (
+      <ThemeProvider>
+        <main className="container">
+          <Header />
+          <Outlet />
+          <Footer />
+        </main>
+      </ThemeProvider>
+    );
+  }
+}
 
 export default Layout;

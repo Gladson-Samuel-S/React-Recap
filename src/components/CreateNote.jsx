@@ -1,55 +1,65 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { Component } from "react";
 
 const URL = "http://localhost:3004/notes";
 
-const CreateNote = () => {
-  const titleRef = useRef();
-  const categoryRef = useRef();
-  const contentRef = useRef();
-  const navigate = useNavigate();
+const postData = async (newNote) => {
+  const res = await fetch(URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/JSON",
+    },
+    body: JSON.stringify(newNote),
+  });
 
-  const postData = async (newNote) => {
-    const res = await fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/JSON",
-      },
-      body: JSON.stringify(newNote),
-    });
+  return res;
+};
 
-    return res;
-  };
+class CreateNote extends Component {
+  constructor(props) {
+    super(props);
+    this.titleRef = React.createRef();
+    this.categoryRef = React.createRef();
+    this.contentRef = React.createRef();
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  render() {
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-    const newNote = {
-      title: titleRef.current.value,
-      content: contentRef.current.value,
-      category: categoryRef.current.value,
+      const newNote = {
+        title: this.titleRef.current.value,
+        content: this.contentRef.current.value,
+        category: this.categoryRef.current.value,
+      };
+
+      postData(newNote).then(
+        () => (window.location.href = "http://localhost:3000/")
+      );
     };
 
-    postData(newNote).then(() => navigate("/"));
-  };
+    return (
+      <form method="post" onSubmit={handleSubmit}>
+        <label htmlFor="title">Enter a title</label>
+        <input id="title" type="text" ref={this.titleRef} />
 
-  return (
-    <form method="post" onSubmit={handleSubmit}>
-      <label htmlFor="title">Enter a title</label>
-      <input id="title" type="text" ref={titleRef} />
+        <label htmlFor="category">Select a Category</label>
+        <select id="category" ref={this.categoryRef}>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+        </select>
 
-      <label htmlFor="category">Select a Category</label>
-      <select id="category" ref={categoryRef}>
-        <option value="Work">Work</option>
-        <option value="Personal">Personal</option>
-      </select>
+        <label htmlFor="content">Note</label>
+        <textarea
+          id="content"
+          cols="30"
+          rows="10"
+          ref={this.contentRef}
+        ></textarea>
 
-      <label htmlFor="content">Note</label>
-      <textarea id="content" cols="30" rows="10" ref={contentRef}></textarea>
-
-      <input className="btn saveBtn" type="submit" value="save" />
-    </form>
-  );
-};
+        <input className="btn saveBtn" type="submit" value="save" />
+      </form>
+    );
+  }
+}
 
 export default CreateNote;

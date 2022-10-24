@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Component } from "react";
 
-const ThemeContext = React.createContext();
-
-export const useTheme = () => useContext(ThemeContext);
+export const ThemeContext = React.createContext();
 
 const themeColours = {
   light: {
@@ -15,32 +13,54 @@ const themeColours = {
   },
 };
 
-const ThemeProvider = ({ children }) => {
-  const [theme, setThemeName] = useState("light");
+class ThemeProvider extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: "light",
+    };
+  }
 
-  useEffect(() => {
+  componentDidMount() {
+    const setTheme = (themeName) => {
+      document.body.style.setProperty(
+        "--background-color",
+        themeColours[themeName].backgroundColor
+      );
+      document.body.style.setProperty("--color", themeColours[themeName].color);
+      this.setState({
+        theme: themeName,
+      });
+    };
+
     const darkOS = window.matchMedia("(prefers-color-scheme: dark)").matches;
     setTheme(darkOS ? "dark" : "light");
-  }, []);
+  }
 
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
+  render() {
+    const themeToggler = () => {
+      const setTheme = (themeName) => {
+        document.body.style.setProperty(
+          "--background-color",
+          themeColours[themeName].backgroundColor
+        );
+        document.body.style.setProperty(
+          "--color",
+          themeColours[themeName].color
+        );
+        this.setState({
+          theme: themeName,
+        });
+      };
+      this.state.theme === "light" ? setTheme("dark") : setTheme("light");
+    };
 
-  const setTheme = (themeName) => {
-    document.body.style.setProperty(
-      "--background-color",
-      themeColours[themeName].backgroundColor
+    return (
+      <ThemeContext.Provider value={{ theme: this.state.theme, themeToggler }}>
+        {this.props.children}
+      </ThemeContext.Provider>
     );
-    document.body.style.setProperty("--color", themeColours[themeName].color);
-    setThemeName(themeName);
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, themeToggler }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+  }
+}
 
 export default ThemeProvider;
