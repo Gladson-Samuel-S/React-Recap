@@ -1,34 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNotes } from "../store/store";
 import AllNotes from "./AllNotes";
+import { observer } from "mobx-react-lite";
 
-const URL = "http://localhost:3004/notes";
-
-const Dashboard = () => {
-  const [notes, setNotes] = useState([]);
-  const [error, setError] = useState(null);
-
-  const deleteNote = async (id) => {
-    const res = await fetch(`${URL}/${id}`, {
-      method: "DELETE",
-    });
-
-    if (res.ok) {
-      setNotes(notes.filter((note) => note.id !== id));
-    }
-  };
+const Dashboard = observer(() => {
+  //const [notes, setNotes] = useState([]);
+  const noteStore = useNotes();
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(URL);
-      const data = await res.json();
-      return data;
-    };
-
-    fetchData()
-      .then((data) => setNotes(data))
-      .catch((err) => setError(err.message));
-  }, []);
+    noteStore.fetchNotes();
+  }, [noteStore]);
 
   return (
     <>
@@ -39,9 +22,13 @@ const Dashboard = () => {
         </button>
       </div>
 
-      <AllNotes notes={notes} error={error} deleteNote={deleteNote} />
+      {noteStore.error ? (
+        <p>Failed to fetch notes...</p>
+      ) : (
+        <AllNotes notes={noteStore.notes} deleteNote={noteStore.deleteNote} />
+      )}
     </>
   );
-};
+});
 
 export default Dashboard;

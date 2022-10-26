@@ -1,9 +1,9 @@
 import { Delete } from "react-feather";
+import { observer } from "mobx-react-lite";
 
-const AllNotes = ({ notes, error, deleteNote }) => {
+const AllNotes = observer(({ notes, deleteNote }) => {
   if (notes === null) return <p>Loading...</p>;
   if (notes.length === 0) return <p>No notes yet...</p>;
-  if (error) return <p>Failed to fetch notes...</p>;
 
   return (
     <section className="notes-container">
@@ -22,6 +22,6 @@ const AllNotes = ({ notes, error, deleteNote }) => {
       ))}
     </section>
   );
-};
+});
 
 export default AllNotes;
